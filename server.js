@@ -1,7 +1,10 @@
 const { dom } = require('isomorphic-jsx');
 
+const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
+
+app.use(bodyParser.json());
 
 const Page = ({ children }) => (
   <html>
@@ -21,15 +24,26 @@ const Home = () => (
   </Page>
 );
 
+const questions = [
+  { question: 'Alesong', answer: 'beer' },
+  { question: 'Dangerously Close to Stupid Amounts of Pineapple', answer: 'beer' },
+  { question: 'Rubber', answer: 'movie' },
+  { question: 'Frozen', answer: 'movie' },
+  { question: 'Kriek Max', answer: 'beer' },
+  { question: 'V for Vendetta', answer: 'movie' },
+];
+
+const questionsWithoutAnswers = questions.map(({ question }) => {
+  return question;
+});
+
 const Quiz = ({ movie, beer }) => (
   <Page>
     <h1>Guess!</h1>
     <a href="/">Go back</a>
     <hr />
     <h3 id="points"></h3>
-    <div>
-      (here comes the question)
-    </div>
+    <div id="question"></div>
 
     <div>
       <button type="button" onclick="guess('beer')">Beer</button>
@@ -37,13 +51,20 @@ const Quiz = ({ movie, beer }) => (
     </div>
 
     <script type="application/javascript">
+      var questions = {JSON.stringify(questionsWithoutAnswers)};
+      var index = 0;
+      var questionContainer = document.getElementById('question');
+
       var points = 0;
       var pointsContainer = document.getElementById('points');
-    
+
       {function renderPoints() {
         pointsContainer.innerHTML = points;
       }}
-      {function guess(index, answer) {
+      {function renderQuestion() {
+        questionContainer.innerHTML = questions[index];
+      }}
+      {function guess(answer) {
         fetch('/quiz/answer', {
           method: 'post',
           headers: {
@@ -51,19 +72,22 @@ const Quiz = ({ movie, beer }) => (
           },
           body: JSON.stringify({ index, answer }),
         })
-          .then(data => data.text())
-          .then(correct => {
-            if (correct) {
+          .then(res => {
+            if (res.ok) {
               points++;
             } else {
               points--;
             }
 
             renderPoints();
+
+            index = (index + 1) % questions.length;
+            renderQuestion();
           });
       }}
 
       renderPoints();
+      renderQuestion();
     </script>
   </Page>
 );
@@ -74,6 +98,16 @@ app.get('/', (req, res) => {
 
 app.get('/quiz', (req, res) => {
   res.send(<Quiz />);
+});
+
+app.post('/quiz/answer', (req, res) => {
+  const { index, answer } = req.body;
+
+  if (answer === questions[index].answer) {
+    res.send();
+  } else {
+    res.status(400).send();
+  }
 });
 
 app.listen(1024, () => console.log('listening on http://localhost:1024'));

@@ -1,0 +1,24 @@
+{
+  "name": "beer-or-movie",
+  "version": "1.0.0",
+  "author": "Martin Lehmann <martin@lehmann.tech>",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "prebuild": "mkdir -p build",
+    "build": "babel server.js -o build/server.js",
+    "build:watch": "yarn build --watch",
+    "start": "yarn build && node build/server.js",
+    "start:watch": "yarn build && nodemon build/server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "isomorphic-jsx": "^0.1.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-react": "^6.24.1",
+    "nodemon": "^1.18.3"
+  }
+}

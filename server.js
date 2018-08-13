@@ -32,6 +32,15 @@ const questions = [
   { question: 'Kriek Max', answer: 'beer' },
   { question: 'V for Vendetta', answer: 'movie' },
   { question: 'Nanny State', answer: 'beer' },
+  { question: 'Barfly', answer: 'movie' },
+  { question: 'Beerfest', answer: 'movie' },
+  { question: 'Drinking Buddies', answer: 'movie' },
+  { question: 'In Heaven There Is No Beer', answer: 'movie' },
+  { question: 'Smashed', answer: 'movie' },
+  { question: 'The Lost Weekend', answer: 'beer' },
+  { question: '5AM Saint', answer: 'beer' },
+  { question: 'Hazy Jane', answer: 'beer' },
+  { question: 'Jet Black Heart', answer: 'beer' },
 ];
 
 const questionsWithoutAnswers = questions.map(({ question }) => {

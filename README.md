@@ -1,5 +1,7 @@
 # Beer or movie?
 
+[![isomorphic-jsx](https://img.shields.io/badge/isomorphic-jsx-yellow.svg)](https://github.com/TheKnarf/isomorphic-jsx)
+
 Inspired by (and a lot less good than) [Pokémon or Big Data](https://pixelastic.github.io/pokemonorbigdata/), this game makes you guess if the prompt is the name of a beer or a movie.
 
 It seemed like a good idea at the time (or at least like it might be funny).

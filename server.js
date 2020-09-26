@@ -42,7 +42,7 @@ const questions = [
   { question: 'Hazy Jane', answer: 'beer' },
   { question: 'Jet Black Heart', answer: 'beer' },
   { question: 'Dr. Raptor', answer: 'beer' },
-  { question: 'Bird of Prey', answer: 'beer' }
+  { question: 'Bird of Prey', answer: 'beer' },
 ];
 
 const questionsWithoutAnswers = questions.map(({ question }) => {

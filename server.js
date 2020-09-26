@@ -41,6 +41,8 @@ const questions = [
   { question: '5AM Saint', answer: 'beer' },
   { question: 'Hazy Jane', answer: 'beer' },
   { question: 'Jet Black Heart', answer: 'beer' },
+  { question: 'Dr. Raptor', answer: 'beer' },
+  { question: 'Bird of Prey', answer: 'beer' }
 ];
 
 const questionsWithoutAnswers = questions.map(({ question }) => {
